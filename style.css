@@ -43,3 +43,8 @@ nav a{
     font-size: 23px;
     font-weight:bold;
 }
+#myChart{
+    width: 80%;
+    background-color: rgb(164, 182, 197);
+    margin: 0 auto; 
+}

@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.0/papaparse.min.js"></script>-->
     
@@ -18,24 +21,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.0/d3.min.js" 
       integrity="sha512-jXsLjbg/Pr8F5U2evjFaEci7mImlUix865lbvnNmp5TzS86+VTTFVDz7FFTS6VHdhSn7UJ4tjZdvpp0GgT0fZA==" 
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <nav>
-      <div class="title">tal.OS</div>
-      <div class="links">
-        <a href="index.html">Home</a>
-        <a class="active" href="#">Dashboard</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </div>
-    </nav>
-    <h1 class="welcome-text">Welcome to the dashboard</h1>
-   
+      <div class= "logo">
+        <img src="logo.png" id="logoImg">
+        <div>
+            <p>TALOS</p>
+            <p id="subtitle"> CLIMATE DETECTIVES </p>
+        </div>
+      </div> 
+      <nav class="nav">
+        <a href ="index.html">HOME</a>
+        <a href ="project.html">PROJECT</a>
+        <a href ="#">GALLERY</a>
+        <a href ="#">LIVE</a>
+        <a href ="#">ABOUT US</a>
+    
+      </nav>
+      
         
     
-    <div class="chartCard">
-      <div class="chartBox">
+    
+      <div >
         <canvas id="myChart"></canvas>
       </div>
-    </div>
     <script src="project_script.js">
       
       </script>

@@ -9,13 +9,13 @@ d3.csv(charData).then(function(datapoints){
 
   console.log(datapoints)
   const date = [];
-  const hour = [];
+  //const hour = [];
   const value = [];
 
   let suitability_control = 0;
   for (i =0; i <datapoints.length; i++){
 
-    if (datapoints[i].Date == "First"){
+    if (datapoints[i].Date == "Third"){
       for (j =i+1; j <datapoints.length; j++){
 
         if (datapoints[j].Date == "ok"){
@@ -23,7 +23,7 @@ d3.csv(charData).then(function(datapoints){
         }
         else{
           date.push(datapoints[j].Date);
-          hour.push(datapoints[j].Hour);
+          //hour.push(datapoints[j].Hour);
           value.push(datapoints[j].Value);
         }
       }
