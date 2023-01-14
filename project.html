@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.0/papaparse.min.js"></script>-->
+    
+
+  </head>
+  <body>
+    
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.0/d3.min.js" 
+      integrity="sha512-jXsLjbg/Pr8F5U2evjFaEci7mImlUix865lbvnNmp5TzS86+VTTFVDz7FFTS6VHdhSn7UJ4tjZdvpp0GgT0fZA==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <nav>
+      <div class="title">tal.OS</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a class="active" href="#">Dashboard</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+    <h1 class="welcome-text">Welcome to the dashboard</h1>
+    <div class ="horizontal">
+      <div>
+        <p style="color:rgb(112, 32, 56);font-weight: bold;">Pick time frame:</p>
+        <select id = "time_frame">
+          <option value ="day">Day</option>
+          <option value ="week">Week</option>
+          <option value = "month">Month</option>
+        </select>
+      </div>
+      <div>
+        <p style="color:rgb(112, 32, 56);font-weight: bold;">Pick a date:</p>
+        <input type="date" id="pick_date" style="width:200px;height:30px;font-size:15px;">
+      </div>
+      
+    </div>
+    
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+    <script src="project_script.js">
+      
+      </script>
+  </body>
+</html>
