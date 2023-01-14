@@ -1,13 +1,9 @@
-var startDateInput = document.getElementById("pick_date");
-var startDate;
 
-startDateInput.addEventListener("change", function() {
-  startDate = startDateInput.value;
-  
-  
-  console.log(startDate);
 
-  const charData = "";
+
+
+
+  const charData = "dataSheet.csv";
 
 d3.csv(charData).then(function(datapoints){
 
@@ -84,5 +80,4 @@ const myChart = new Chart(
   config
 );
 
-});
 });
