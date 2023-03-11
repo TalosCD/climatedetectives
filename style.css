@@ -48,3 +48,47 @@ nav a{
     background-color: rgb(164, 182, 197);
     margin: 0 auto; 
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: #dddddd;
+}
+.gauge-container {
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+  
+  .gauge {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .gauge-fill {
+    width: 50%;
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 50% 0 0 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 100% 50%;
+    transform: rotate(0deg);
+    transition: transform 0.5s ease;
+  }
+ 
