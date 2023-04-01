@@ -1,83 +1,76 @@
+let API_KEY = "zcohruuzqcb2s7nldlhhw2yl05hflden";
+let API_SECRET = "prvvpnyjv0ygmbflx2uxh6vjzpek0gqk";
+let STATION_ID = "147952";
+let t = Math.floor(Date.now() / 1000);
 
+let firstDateString = "2023-02-11T14:45:00";
+let secondDateString = "2023-02-11T16:00:00";
+let firstDate = new Date(firstDateString);
+let secondDate = new Date(secondDateString);
 
+const unixTimeFirst = firstDate.getTime();
+const unixTimeSecond = secondDate.getTime();
 
+const unixTimeInSecondsFirst = unixTimeFirst / 1000;
+const unixTimeInSecondsSecond = unixTimeSecond / 1000;
 
+let apiHashHis = `api-key${API_KEY}end-timestamp${unixTimeInSecondsSecond}start-timestamp${unixTimeInSecondsFirst}station-id${STATION_ID}t${t}`;
+var apiSignatureHis = CryptoJS.HmacSHA256(apiHashHis, API_SECRET).toString();
 
-  const charData = "https://www.googleapis.com/drive/v3/files/1ABMSqR_CFUq5bFYpQjsb64g2rG1ohXw5?alt=media&key=AIzaSyAHxeiBSCVs4eclFBkilxqdSzGniaFQ_Rw";
+let FULL_URL_HIS = `https://api.weatherlink.com/v2/historic/${STATION_ID}?api-key=${API_KEY}&t=${t}&start-timestamp=${unixTimeInSecondsFirst}&end-timestamp=${unixTimeInSecondsSecond}&api-signature=${apiSignatureHis}`;
 
-d3.csv(charData).then(function(datapoints){
+// const charData =
+//   "https://www.googleapis.com/drive/v3/files/1ABMSqR_CFUq5bFYpQjsb64g2rG1ohXw5?alt=media&key=AIzaSyAHxeiBSCVs4eclFBkilxqdSzGniaFQ_Rw";
 
-  console.log(datapoints)
-  const date = [];
-  //const hour = [];
-  const value = [];
+fetch(FULL_URL_HIS)
+  .then((rep) => rep.json())
+  .then((data) => {
+    data = data.sensors[1].data;
+    console.log(data);
+    firstDate = new Date(firstDate.getTime() + 15 * 60 * 1000);
 
-  let suitability_control = 0;
-  for (i =0; i <datapoints.length; i++){
+    var date = [];
+    var value = [];
 
-    if (datapoints[i].Date == "Third"){
-      for (j =i+1; j <datapoints.length; j++){
+    data.forEach(function (measurement) {
+      date.push(date.length + 1);
+      value.push(parseFloat(toCelcius(measurement.temp_avg)));
+    });
 
-        if (datapoints[j].Date == "ok"){
-          break;
-        }
-        else{
-          date.push(datapoints[j].Date);
-          //hour.push(datapoints[j].Hour);
-          value.push(datapoints[j].Value);
-        }
-      }
-      break;
-    }
-    
-  }
-  
-  console.log(value)
-// setup 
-const data = {
-  labels: date,
-  datasets: [{
-    label: 'Weekly Sales',
-    data: value,
-    backgroundColor: [
-      'rgba(255, 26, 104, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(0, 0, 0, 0.2)'
-    ],
-    borderColor: [
-      'rgba(255, 26, 104, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgba(255, 159, 64, 1)',
-      'rgba(0, 0, 0, 1)'
-    ],
-    borderWidth: 1
-  }]
-};
+    console.log(value);
+    console.log(date);
+    // setup
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: date,
+        datasets: [
+          {
+            label: "Temperature",
+            data: value,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    });
+  });
 
-// config 
-const config = {
-  type: 'bar',
-  data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-};
+// document.getElementById("tableContainerHis").innerHTML = table;
 
-// render init block
-const myChart = new Chart(
-  document.getElementById('myChart'),
-  config
-);
-
-});
+function toCelcius(num) {
+  return ((num - 32) / 1.8).toFixed(2);
+}

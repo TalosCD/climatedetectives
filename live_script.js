@@ -6,7 +6,7 @@ let t = Math.floor(Date.now() / 1000);
 let apiHashCur = `api-key${API_KEY}station-id${STATION_ID}t${t}`;
 
 var apiSignatureCur = CryptoJS.HmacSHA256(apiHashCur, API_SECRET).toString();
-let FULL_URL_CUR = (`https://api.weatherlink.com/v2/current/${STATION_ID}?api-key=${API_KEY}&t=${t}&api-signature=${apiSignatureCur}`);
+let FULL_URL_CUR = 'https://cors-anywhere.herokuapp.com/'+(`https://api.weatherlink.com/v2/current/${STATION_ID}?api-key=${API_KEY}&t=${t}&api-signature=${apiSignatureCur}`);
 
 fetch(FULL_URL_CUR).then(rep => rep.json()).then(
     data => {
@@ -26,61 +26,74 @@ fetch(FULL_URL_CUR).then(rep => rep.json()).then(
         table += `<tr><td>${aqi}</td><td>${pm1}</td><td>${pm2p5}</td><td>${pm10}</td><td>${temp}</td><td>${humidity}</td><td>${heatIndex}</td><td>${dewPoint}</td><td>${wetBulb}</td></tr></table>`;
 
         //document.getElementById('tableContainerCur').innerHTML = table;
-        var gauge = new JustGage({
+        var gaugeOptions = {
+          // other options
+          textColor: "red"
+        };
+
+        var gauge1 = new JustGage({
             id: "gauge1",
             value:humidity,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
-        var gauge = new JustGage({
+        var gauge2 = new JustGage({
             id: "gauge2",
             value:aqi,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
-        var gauge = new JustGage({
+        var gauge3 = new JustGage({
             id: "gauge3",
             value:heatIndex,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
-        var gauge = new JustGage({
+        var gauge4 = new JustGage({
             id: "gauge4",
             value:temp,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
-        var gauge = new JustGage({
+        var gauge5 = new JustGage({
             id: "gauge5",
             value:dewPoint,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
-        var gauge = new JustGage({
+        var gauge6 = new JustGage({
             id: "gauge6",
             value:pm1,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
-        var gauge = new JustGage({
+        var gauge7 = new JustGage({
             id: "gauge7",
             value:pm2p5,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
-        var gauge = new JustGage({
+        var gauge8 = new JustGage({
             id: "gauge8",
             value:wetBulb,
             min: -10,
             max: 50,
-            title: "Example Gauge"
+            title: "Example Gauge",
+            gaugeOptions: gaugeOptions
           });
 
       });
