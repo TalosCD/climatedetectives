@@ -82,7 +82,7 @@ th {
 }
 .gauge-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 }
 .gauge-card {
@@ -124,4 +124,10 @@ th {
   transform-origin: 100% 50%;
   transform: rotate(0deg);
   transition: transform 0.5s ease;
+}
+
+.picker {
+  display: flex;
+  justify-content: center;
+  margin: 5%;
 }
