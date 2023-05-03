@@ -6,7 +6,7 @@ let t = Math.floor(Date.now() / 1000);
 let apiHashCur = `api-key${API_KEY}station-id${STATION_ID}t${t}`;
 
 var apiSignatureCur = CryptoJS.HmacSHA256(apiHashCur, API_SECRET).toString();
-let FULL_URL_CUR = (`https://cors-proxy.htmldriven.com/?url=https://api.weatherlink.com/v2/current/${STATION_ID}?api-key=${API_KEY}&t=${t}&api-signature=${apiSignatureCur}`);
+let FULL_URL_CUR = (`https://api.weatherlink.com/v2/current/${STATION_ID}?api-key=${API_KEY}&t=${t}&api-signature=${apiSignatureCur}`);
 
 fetch(FULL_URL_CUR).then(rep => rep.json()).then(
     data => {
