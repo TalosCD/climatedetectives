@@ -34,16 +34,16 @@ fetch(FULL_URL_CUR).then(rep => rep.json()).then(
         var gauge1 = new JustGage({
             id: "gauge1",
             value:humidity,
-            min: -10,
-            max: 50,
+            min: 0,
+            max: 100,
             title: "Example Gauge",
             gaugeOptions: gaugeOptions
           });
         var gauge2 = new JustGage({
             id: "gauge2",
             value:aqi,
-            min: -10,
-            max: 50,
+            min: 0,
+            max: 150,
             title: "Example Gauge",
             gaugeOptions: gaugeOptions
           });
@@ -90,8 +90,8 @@ fetch(FULL_URL_CUR).then(rep => rep.json()).then(
         var gauge8 = new JustGage({
             id: "gauge8",
             value:wetBulb,
-            min: -10,
-            max: 50,
+            min: 40,
+            max: 120,
             title: "Example Gauge",
             gaugeOptions: gaugeOptions
           });
