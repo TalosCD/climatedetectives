@@ -20,8 +20,79 @@ var apiSignatureHis = CryptoJS.HmacSHA256(apiHashHis, API_SECRET).toString();
 
 let FULL_URL_HIS = `https://api.weatherlink.com/v2/historic/${STATION_ID}?api-key=${API_KEY}&t=${t}&start-timestamp=${unixTimeInSecondsFirst}&end-timestamp=${unixTimeInSecondsSecond}&api-signature=${apiSignatureHis}`;
 var myChart = null;
-// const charData =
-//   "https://www.googleapis.com/drive/v3/files/1ABMSqR_CFUq5bFYpQjsb64g2rG1ohXw5?alt=media&key=AIzaSyAHxeiBSCVs4eclFBkilxqdSzGniaFQ_Rw";
+
+fetch(FULL_URL_HIS)
+  .then((rep) => rep.json())
+  .then((data) => {
+    data = data.sensors[1].data;
+    console.log(data);
+    firstDate = new Date(firstDate.getTime() + 15 * 60 * 1000);
+
+    var date = [];
+    var value = [];
+
+    data.forEach(function (measurement) {
+      date.push(date.length + 1);
+      value.push(parseFloat(toCelcius(measurement.temp_avg)));
+    });
+
+    console.log(value);
+    console.log(date);
+    // setup
+    const ctx = document.getElementById("myChart").getContext("2d");
+
+    if(myChart == null){
+      myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: date,
+          datasets: [
+            {
+              label: "Temperature",
+              data: value,
+              backgroundColor: "#12674a",
+              borderColor: "#12674a",
+              borderWidth: 3, // <-- increase line width to 3
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: {
+                color: "white", // <-- set legend label color to white
+              },
+            },
+          },
+          scales: {
+            y: {
+              ticks: {
+                color: "white", // <-- set axis values to white
+              },
+            },
+            x: {
+              ticks: {
+                color: "white", // <-- set axis values to white
+              },
+            },
+          },
+        },
+      });
+    } else {
+      myChart.options.plugins.legend.labels.color = "white";
+      myChart.options.scales.y.ticks.color = "white";
+      myChart.options.scales.x.ticks.color = "white";
+      myChart.data.datasets[0].borderColor = "#12674a"; // <-- set line color
+      myChart.data.datasets[0].pointBackgroundColor = "#12674a"; // <-- set point color
+
+      myChart.update();
+    }
+    
+    
+    
+  });
 
 select.addEventListener('change', function handleChange(event) {
   console.log(event.target.value); // 👉️ get selected VALUE

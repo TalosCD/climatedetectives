@@ -57,7 +57,7 @@ nav a {
 }
 #myChart {
   width: 80%;
-  background-color: rgb(164, 182, 197);
+  background-color: rgb(54, 49, 49);
   margin: 0 auto;
 }
 table {
@@ -159,6 +159,9 @@ th {
   text-align: center;
 }
 .index_text2 {
+  background-color: rgb(54, 49, 49);
+  border-radius: 10px;
+  margin: 5%;
   color: #af1536;
   text-decoration: none;
   font-family:Arial ;
